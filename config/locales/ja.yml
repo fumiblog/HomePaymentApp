@@ -1,0 +1,7 @@
+ja:
+  enums:
+    detail:
+      payment_method:
+        cash: "現金"
+        paypay: "paypay"
+        credit: "クレジット"
