@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <h4>分類訂正</h4>
+    <div class="genre-make">
+      <%= form_with model: @genre, url: admins_genre_path(@genre), local: true do |f| %>
+        分類：<%= f.text_field :name %>
+        <%= f.submit "更新", class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <h4>分類</h4>
+    <div class="genre-make">
+      <%= form_with model: @genre, url: admins_genres_path, local: true do |f| %>
+        分類：<%= f.text_field :name %>
+        <%= f.submit "作成", class: "btn btn-success" %>
+      <% end %>
+    </div>
+    <div class="genre-list">
+      <table class="table table-striped">
+        <thead>
+          <tr class="text-center">
+            <th>分類名</th>
+            <th>件数</th>
+            <th>予算【<%= Category.sum(:budget).to_s(:delimited) %>】</th>
+            <th>金額</th>
+            <th>消化率</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |genre| %>
+            <tr>
+              <td><%= genre.name %></td>
+              <td class="text-end"><%= link_to genre.categories.count, admins_categories_path(:genre_id => genre.id) %></td>
+              <td class="text-end"><%= genre.categories.sum(:budget).to_s(:delimited) %></td>
+              <td class="text-end"><%= %></td>
+              <td class="text-end"><%= %></td>
+              <td><%= link_to "訂正", edit_admins_genre_path(genre), class: "btn btn-warning btn-sm" %></td>
+              <td><%= link_to "削除", admins_genre_path(genre), method: :delete, class: "btn btn-danger btn-sm" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 text-center border m-2 p-2">
+      <h4>家計簿</h4>
+      <%= image_tag 'us50c_表.png', class: "footprint-img rounded-circle border", size: "100x100" %>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="doropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              ジャンル
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% @genres.each do |genre| %>
+                <li>
+                  <a href="#" class="dropdown-item">
+                    <%= link_to genre.name, root_path(:genre_id => genre.id) %>
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <h6 class="m-1 border bg-info">
+            <% if @genre == nil %>
+              全て表示
+            <% else %>
+              <%= @genre.name %>
+            <% end %>
+          </h6>
+        </div>
+        <div class="col-sm-9">
+          <div class="row">
+            <% @categories.each do |category| %>
+              <div class="col-sm-5 m-1">
+                <%= link_to new_users_footprint_path do %>
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= category.name %></h5>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+</div>

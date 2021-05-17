@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  day: 2021-05-16 18:52:00
+  payment_method: 1
+  category_id: 1
+  memo: MyString
+
+two:
+  day: 2021-05-16 18:52:00
+  payment_method: 1
+  category_id: 1
+  memo: MyString
