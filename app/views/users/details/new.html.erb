@@ -6,19 +6,31 @@
       <%= image_tag 'us50c_表.png', class: "footprint-img rounded-circle border", size: "100x100" %>
       <div class="details-make">
         <%= form_with model: @detail, url: users_details_path(@detail), local: true do |f| %>
-          <table class="table-striped">
-            <div class="thead">
-              <tr>
-                <th>日 時　</th>
-                <th><%= f.date_field :day %>　</th>
-                <th>カテゴリ　</th>
-                <th>
-                  <%= @detail.find(:category_id => params[:category_id]).category.name %>
-                  <%= f.hidden_field :category_id, :value => params[:category_id] %>
-                </th>
-              </tr>
+          <form>
+            <label class="control-label border bg-warning m-3 p-2">
+              <%= @category.name %>
+              <%= f.hidden_field :category_id, :value => params[:category_id] %>
+            </label>
+            <div class="form-group m-3 p-2">
+              <%= f.label :day, :日　　付　 %>
+              <%= f.date_field :day %>
             </div>
-          </table>
+            <div class="form-group m-3 p-2">
+              <%= f.label :paymente_method, :支払方法　 %>
+              <%#= f.select :payment_method, Detail.payment_methods_i18n.keys.map{|k|[I18n.t("enums.detail.payment_method.#{k}"),k]} %>
+              <%#= f.select :payment_method, Detail.payment_methods_i18n.map{|v,k|[I18n.t("enums.detail.payment_method.#{k}"),v]} %>
+              <%= f.select :payment_mthod, Detail.payment_methods_i18n.map { |v,k| [t("details.payment_method.#{k}"), k]} %>
+            </div>
+            <div class="form-group m-3 p-2">
+              <%= f.label :coin, :金　　額　 %>
+              <%= f.number_field :coin %>
+            </div>
+            <div class="form-group m-3 p-2">
+              <%= f.label :memo, :メ　　モ　 %>
+              <%= f.text_field :memo %>
+            </div>
+            <%= f.submit "登録", class: "btn btn-success" %>
+          </form>
         <% end %>
       </div>
     </div>

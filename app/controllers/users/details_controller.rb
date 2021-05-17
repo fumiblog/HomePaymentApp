@@ -1,7 +1,7 @@
 class Users::DetailsController < ApplicationController
   def new
     @detail = Detail.new
-    # byebug
+    @category = Category.find(params[:category_id])
   end
 
   def create
