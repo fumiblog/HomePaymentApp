@@ -32,10 +32,10 @@
           <div class="row">
             <% @categories.each do |category| %>
               <div class="col-sm-5 m-1">
-                <%= link_to new_users_footprint_path do %>
-                  <div class="card">
+                <div class="card">
+                  <%= link_to new_users_detail_path(:category_id => category.id) do %>
                     <div class="card-body">
-                      <h5 class="card-title"><%= category.name %></h5>
+                      <div class="card-title fw-lighter"><%= category.name %></div>
                     </div>
                   </div>
                 <% end %>
