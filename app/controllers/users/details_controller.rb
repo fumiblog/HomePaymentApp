@@ -5,8 +5,8 @@ class Users::DetailsController < ApplicationController
   end
 
   def create
-    @detail = Detail.find(detail_params)
-    @detail.save
+    @detail = Detail.new(detail_params)
+    @detail.save!
     redirect_to root_path
   end
 
@@ -14,7 +14,7 @@ class Users::DetailsController < ApplicationController
   def detail_params
     params.require(:detail).permit(
       :day,
-      :peyment_method,
+      :payment_method,
       :category_id,
       :memo,
       :coin
