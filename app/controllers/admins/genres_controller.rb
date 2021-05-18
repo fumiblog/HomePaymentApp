@@ -2,6 +2,8 @@ class Admins::GenresController < ApplicationController
   def index
     @genre = Genre.new
     @genres = Genre.all
+    @category_payment = Category.pluck(:genre_id, :id)
+    # byebug
   end
 
   def create

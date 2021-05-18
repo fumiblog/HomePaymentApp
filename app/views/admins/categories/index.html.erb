@@ -31,8 +31,16 @@
               <td><%= category.genre.name %></td>
               <td class="text-end"><%= category.budget.to_s(:delimited) %></td>
               <td class="text-end"><%= category.details.sum(:coin).to_s(:delimited) %></td>
-              <td><%= %></td>
-              <td><%= category.memo %></td>
+              <td class="text-end">
+                <% if category.details.sum(:coin) == 0  %>
+                  0%
+                <% elsif category.budget == 0 %>
+                  <%= category.details.sum(:coin) %>%
+                <% else %>
+                  <%= number_to_percentage(category.details.sum(:coin).to_f  / category.budget.to_f * 100, :precision => 0) %>
+                <% end %>
+              </td>
+              <td class="fw-lighter"><%= category.memo %></td>
               <td><%= link_to "訂正", edit_admins_category_path(category), class: "btn btn-warning btn-sm" %></td>
               <td><%= link_to "削除", admins_category_path(category), method: :delete, class: "btn btn-danger btn-sm" %></td>
             </tr>
