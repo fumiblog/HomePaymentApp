@@ -10,6 +10,12 @@ class Users::DetailsController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    @detail = Detail.find(params[:id])
+    @detail.destroy
+    redirect_to root_path
+  end
+
   private
   def detail_params
     params.require(:detail).permit(
