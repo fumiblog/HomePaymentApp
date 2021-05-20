@@ -14,7 +14,7 @@
             <th>分類名</th>
             <th>件数</th>
             <th>予算【<%= Category.sum(:budget).to_s(:delimited) %>】</th>
-            <th>金額</th>
+            <th>金額【<%= Genre.joins(categories: :details).sum(:coin).to_s(:delimited) %>】</th>
             <th>消化率</th>
             <th></th>
             <th></th>
@@ -26,8 +26,8 @@
               <td><%= genre.name %></td>
               <td class="text-end"><%= link_to genre.categories.count, admins_categories_path(:genre_id => genre.id) %></td>
               <td class="text-end"><%= genre.categories.sum(:budget).to_s(:delimited) %></td>
-              <td class="text-end"><%= %></td>
-              <td class="text-end"><%= %></td>
+              <td class="text-end"><%= Genre.joins(categories: :details).where(id: genre.id).sum(:coin).to_s(:delimited) %></td>
+              <td class="text-end"><%= number_to_percentage(Genre.joins(categories: :details).where(id: genre.id).sum(:coin).to_f / genre.categories.sum(:budget).to_f * 100, :precision => 1) %></td>
               <td><%= link_to "訂正", edit_admins_genre_path(genre), class: "btn btn-warning btn-sm" %></td>
               <td><%= link_to "削除", admins_genre_path(genre), method: :delete, class: "btn btn-danger btn-sm" %></td>
             </tr>
