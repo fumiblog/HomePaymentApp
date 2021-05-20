@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_17_005917) do
+ActiveRecord::Schema.define(version: 2021_05_20_043145) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_005917) do
   end
 
   create_table "details", force: :cascade do |t|
-    t.time "day"
+    t.date "day"
     t.integer "payment_method"
     t.integer "category_id"
     t.string "memo"

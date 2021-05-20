@@ -9,5 +9,6 @@ class Users::HomesController < ApplicationController
       @genre = Genre.find(params[:genre_id])
       # byebug
     end
+    @details = Detail.all
   end
 end
