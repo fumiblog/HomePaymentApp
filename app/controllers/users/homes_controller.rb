@@ -5,9 +5,10 @@ class Users::HomesController < ApplicationController
     # @genres.each do |genre|
     #   gon.genre_total = Genre.joins(categories: :details).where(id: genre.id).sum(:coin)
     # end
+    gon.progress_coin = Category.sum(:budget) - Genre.joins(categories: :details).sum(:coin)
     if params[:genre_id] == nil
       @categories = Category.all
-      # byebug
+      # byebugß
     else
       @categories = Category.where(:genre_id => params[:genre_id])
       @genre = Genre.find(params[:genre_id])
