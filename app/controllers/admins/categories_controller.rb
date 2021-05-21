@@ -39,7 +39,8 @@ class Admins::CategoriesController < ApplicationController
       :name,
       :genre_id,
       :budget,
-      :memo
+      :memo,
+      :user_id
     )
   end
 end
