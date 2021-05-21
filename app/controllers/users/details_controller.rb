@@ -23,7 +23,8 @@ class Users::DetailsController < ApplicationController
       :payment_method,
       :category_id,
       :memo,
-      :coin
+      :coin,
+      :user_id
     )
   end
 end

@@ -19,7 +19,10 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link disabled" tavindex="-1" aria-disabled="true">Disabled</a>
+            <a href="<%= new_user_session_path %>" class="nav-link" tavindex="-1" aria-disabled="true">Login</a>
+          </li>
+          <li class="nav-item">
+            <a href="<%= destroy_user_session_path %>" class="nav-link" data-method="delete" tavindex="-1" aria-disabled="true">Logout</a>
           </li>
         </ul>
         <form action="" class="d-flex">
