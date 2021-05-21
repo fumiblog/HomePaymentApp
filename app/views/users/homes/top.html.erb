@@ -1,8 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-5 text-center border p-2">
-      <h4>家計簿</h4>
+    <div class="col-sm-3">
+      <div class="progress-data border">
+        <h4 class="m-2">使用可能残高</h4>
+        <p class="countup text-end h1"><%= (Category.sum(:budget) - Genre.joins(categories: :details).sum(:coin)).to_s(:delimited) %>円</p>
+        <canvas id="genre_graph"></canvas>
+      </div>
+    </div>
+    <div class="col-sm-5 text-center border">
+      <h4 class="m-2">家計簿</h4>
       <%= image_tag 'us50c_表.png', class: "footprint-img rounded-circle border", size: "100x100" %>
       <div class="row">
         <div class="col-sm-3">
@@ -47,11 +53,11 @@
     </div>
     <div class="col-sm-4">
       <div class="detail-list border">
-        <h4>取引明細</h4>
+        <h4 class="m-2">取引明細</h4>
         <table class="table w-auto table-sm text-xsmall">
           <thead>
             <tr class="text-center">
-              <th>日　時</th>
+              <th class=>日　時</th>
               <th>カテゴリ</th>
               <th>金　額</th>
               <th></th>
@@ -71,4 +77,43 @@
       </div>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="jquery-numerator.js"></script>
+  <script>
+    'use strict'
+      // jQuery( function($) {
+      //   $('.countup').numerator( {
+      //     easing: 'linear', // アニメーションの動き
+      //     duration: 3000, // アニメーションの時間
+      //     toValue: 1000, // どこまでカウントアップするか
+      //     delimiter: ',', // ３桁ごとに区切る値
+      //     rounding: 0 // 小数点以下の桁数
+      //   });
+      // });
+
+
+    // var ctx = document.getElementById("genre_graph");
+    //   new Chart(ctx, {
+    //     type: 'horizontalBar',
+    //     data: {
+    //       labels: gon.genre_name
+    //       datasets: [{
+    //         label: '分類毎消化率',
+    //         backgroundColor: '#20B2AA',
+    //         data: gon
+    //       }]
+    //     }
+    //   });
+
+    //   var options = {
+    //       scales: {
+    //           xAxes: [{
+    //               ticks: {
+    //                   min: 500000
+    //               }
+    //           }]
+    //       }
+    //   };
+  </script>
 </div>
