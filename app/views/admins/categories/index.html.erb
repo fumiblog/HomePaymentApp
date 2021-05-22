@@ -9,6 +9,9 @@
         メ　モ：<%= f.text_field :memo, :size => "30" %>　
         <%= f.submit "作成", class: "btn btn-success" %>
       <% end %>
+      <div class="category-csv text-end m-1">
+        <%= link_to "CSV出力", admins_categories_path(format: :csv), class: "btn btn-outline-success" %>
+      </div>
     </div>
     <div class="category-list">
       <table class="table table-striped">
