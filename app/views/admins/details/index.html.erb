@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <h4>明細</h4>
+    <div class="detail-csv text-end m-1">
+      <%= link_to "CSV出力", admins_details_path(format: :csv), class: "btn btn-outline-success" %>
+    </div>
+    <div class="detail-list">
+      <table class="table table-striped">
+        <thead>
+          <tr class="text-center">
+            <th>日　付</th>
+            <th>カテゴリ名</th>
+            <th>支払方法</th>
+            <th>金　額</th>
+            <th>メ　モ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @details.each do |detail| %>
+            <tr>
+              <td><%= detail.day %></td>
+              <td><%= detail.category.name %></td>
+              <td><%= detail.payment_method %></td>
+              <td class="text-end"><%= detail.coin.to_s(:delimited) %></td>
+              <td class="fw-lighter"><%= detail.memo %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

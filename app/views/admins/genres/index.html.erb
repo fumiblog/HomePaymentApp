@@ -6,6 +6,9 @@
         分類：<%= f.text_field :name %>
         <%= f.submit "作成", class: "btn btn-success" %>
       <% end %>
+      <div class="genre-csv text-end">
+        <%= link_to "CSV出力", admins_genres_path(format: :csv), class: "btn btn-outline-success" %>
+      </div>
     </div>
     <div class="genre-list">
       <table class="table table-striped">

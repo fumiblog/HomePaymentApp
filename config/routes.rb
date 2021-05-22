@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :admins do
     resources :genres
     resources :categories
+    resources :details, only: [:index]
   end
 
 
