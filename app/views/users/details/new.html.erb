@@ -10,7 +10,8 @@
             <label class="control-label border bg-warning m-3 p-2">
               <%= @category.name %>
               <%= f.hidden_field :category_id, :value => params[:category_id] %>
-            </label>
+            </label><br />
+            <p><%= @category.memo %></p>
             <div class="form-group m-3 p-2">
               <%= f.label :day, :日　　付　 %>
               <%= f.date_field :day %>
