@@ -9,6 +9,11 @@
           <%= render "users/shared/error_messages", resource: resource %>
 
           <div class="field p-2">
+            <%= f.label :name %><br />
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", :size => 40 %>
+          </div>
+
+          <div class="field p-2">
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email", :size => 40 %>
           </div>

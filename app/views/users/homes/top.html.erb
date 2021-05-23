@@ -2,53 +2,78 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="progress-data border">
-        <h4 class="m-2">使用可能残高</h4>
-        <p class="countup text-end h1"><%= (Category.sum(:budget) - Genre.joins(categories: :details).sum(:coin)).to_s(:delimited) %>円</p>
-        <canvas id="genre_graph"></canvas>
+        <% if user_signed_in? %>
+          <h4 class="m-2">使用可能残高</h4>
+          <p class="countup text-end h1"><%= (Category.sum(:budget) - Genre.joins(categories: :details).sum(:coin)).to_s(:delimited) %>円</p>
+          <canvas id="genre_graph"></canvas>
+        <% else %>
+          <h4 class="m-2">予算の多いジャンル</h4>
+          <% @genres.each_with_index do |genre, i| %>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td class="text-left"><%= i + 1 %>位</td>
+                  <td class="text-left h5"><%= genre.name %></td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        <% end %>
       </div>
     </div>
     <div class="col-sm-5 text-center border">
       <h4 class="m-2">家計簿</h4>
       <%= image_tag 'us50c_表.png', class: "footprint-img rounded-circle border", size: "100x100" %>
       <div class="row">
-        <div class="col-sm-3">
-          <div class="doropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              ジャンル
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <% @genres.each do |genre| %>
-                <li>
-                  <a href="#" class="dropdown-item">
-                    <%= link_to genre.name, root_path(:genre_id => genre.id) %>
-                  </a>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-          <h6 class="m-1 border bg-info">
-            <% if @genre == nil %>
-              全て表示
-            <% else %>
-              <%= @genre.name %>
-            <% end %>
-          </h6>
-        </div>
-        <div class="col-sm-9">
-          <div class="row">
-            <% @categories.each do |category| %>
-              <div class="col-sm-5 m-1">
-                <div class="card">
-                  <%= link_to new_users_detail_path(:category_id => category.id) do %>
-                    <div class="card-body">
-                      <div class="card-title fw-lighter"><%= category.name %></div>
-                    </div>
-                  </div>
+        <% if user_signed_in? %>
+          <div class="col-sm-3">
+            <div class="doropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                ジャンル
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% @genres.each do |genre| %>
+                  <li>
+                    <a href="#" class="dropdown-item">
+                      <%= link_to genre.name, root_path(:genre_id => genre.id) %>
+                    </a>
+                  </li>
                 <% end %>
-              </div>
-            <% end %>
+              </ul>
+            </div>
+            <h6 class="m-1 border bg-info">
+              <% if @genre == nil %>
+                全て表示
+              <% else %>
+                <%= @genre.name %>
+              <% end %>
+            </h6>
           </div>
-        </div>
+          <div class="col-sm-9">
+            <div class="row">
+              <% @categories.each do |category| %>
+                <div class="col-sm-5 m-1">
+                  <div class="card">
+                    <%= link_to new_users_detail_path(:category_id => category.id) do %>
+                      <div class="card-body">
+                        <div class="card-title fw-lighter"><%= category.name %></div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <% @categories.each do |category| %>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title fw-lighter h5"><%= category.name %></div>
+                <div class="card-main text-end h4"><%= category.budget.to_s(:delimited) %>円</div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
     <div class="col-sm-4">
