@@ -9,11 +9,11 @@ class Users::HomesController < ApplicationController
     if user_signed_in?
       if params[:genre_id] == nil 
         @categories = current_user.categories
-        @details = current_user.details
+        @details = current_user.details.order(day: 'DESC')
       else
         @categories = current_user.categories.where(:genre_id => params[:genre_id])
         @genre = Genre.find(params[:genre_id])
-        @details = current_user.details.where(:genre_id => params[:genre_id])
+        @details = current_user.details.order(day: 'DESC')
       end
     else
       genre_budget_sort = Category.group(:genre_id).sum(:budget).sort_by{|_, v| v}.reverse.to_h.keys

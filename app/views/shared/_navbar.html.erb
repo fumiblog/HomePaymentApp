@@ -25,6 +25,9 @@
             <a href="<%= destroy_user_session_path %>" class="nav-link" data-method="delete" tavindex="-1" aria-disabled="true">Logout</a>
           </li>
         </ul>
+        <% if user_signed_in? %>
+          <div class="sign-in-message"><%= current_user.name %>さんようこそ！</div>
+        <% end %>
         <form action="" class="d-flex">
           <input type="seatch" class="form-control me-2" placeholder="Search" aria-lavel="Serch">
           <button class="btn btn-outline-success" type="submit">Search</button>
