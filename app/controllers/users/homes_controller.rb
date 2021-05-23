@@ -2,11 +2,10 @@ class Users::HomesController < ApplicationController
   def top
     @genres = Genre.all
     gon.genre_name = Genre.all.pluck(:name)
-    # @genres.each do |genre|
-    #   gon.genre_total = Genre.joins(categories: :details).where(id: genre.id).sum(:coin)
-    # end
     gon.progress_coin = Category.sum(:budget) - Genre.joins(categories: :details).sum(:coin)
     if user_signed_in?
+      @user_budget = current_user.categories.sum(:budget)
+      @user_coin = current_user.details.sum(:coin)
       if params[:genre_id] == nil 
         @categories = current_user.categories
         @details = current_user.details.order(day: 'DESC')

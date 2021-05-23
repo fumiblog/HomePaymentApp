@@ -4,7 +4,11 @@
       <div class="progress-data border">
         <% if user_signed_in? %>
           <h4 class="m-2">使用可能残高</h4>
-          <p class="countup text-end h1"><%= (Category.sum(:budget) - Genre.joins(categories: :details).sum(:coin)).to_s(:delimited) %>円</p>
+          <p class="countup text-end h1"><%= (@user_budget - @user_coin).to_s(:delimited) %>円</p>
+          <h4 class="m-2">予　算</h4>
+          <p class="countup text-end h3"><%= @user_budget.to_s(:delimited) %>円</p>
+          <h4 class="m-2">使用率</h4>
+          <p class="countup text-end h3"><%= number_to_percentage(@user_coin.to_f / @user_budget.to_f * 100, :precision => 1) %></p>
           <canvas id="genre_graph"></canvas>
         <% else %>
           <h4 class="m-2">予算の多いジャンル</h4>
@@ -80,7 +84,7 @@
     <div class="col-sm-4">
       <div class="detail-list border">
         <% if user_signed_in? %>
-          <h4 class="m-2">取引明細</h4>
+          <h4 class="m-2"><%= link_to "取引明細", users_categories_path %></h4>
           <table class="table w-auto table-sm text-xsmall">
             <thead>
               <tr class="text-center">
@@ -94,7 +98,7 @@
               <% @details.each do |detail| %>
                 <tr>
                   <td><%= detail.day %></td>
-                  <td><%= detail.category.name %></td>
+                  <td><%= link_to detail.category.name, users_categories_path(:genre_id => detail.category.genre_id) %></td>
                   <td class="text-end"><%= detail.coin.to_s(:delimited) %></td>
                   <td><%= link_to "削除", users_detail_path(detail), method: :delete, class: "btn btn-danger btn-sm" %></td>
                 </tr>

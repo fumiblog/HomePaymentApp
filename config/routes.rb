@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :users do
       resources :details
+      resources :categories
   end
 
   root 'users/homes#top'

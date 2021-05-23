@@ -6,6 +6,7 @@ class Users::DetailsController < ApplicationController
 
   def create
     @detail = Detail.new(detail_params)
+    @detail.user_id = current_user.id
     @detail.save!
     redirect_to root_path
   end
