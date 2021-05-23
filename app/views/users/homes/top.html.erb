@@ -23,7 +23,7 @@
     </div>
     <div class="col-sm-5 text-center border">
       <h4 class="m-2">家計簿</h4>
-      <%= image_tag 'us50c_表.png', class: "footprint-img rounded-circle border", size: "100x100" %>
+      <%= image_tag 'us50c_表.png', class: "homepayment-img rounded-circle border", size: "100x100" %>
       <div class="row">
         <% if user_signed_in? %>
           <div class="col-sm-3">
@@ -57,6 +57,7 @@
                     <%= link_to new_users_detail_path(:category_id => category.id) do %>
                       <div class="card-body">
                         <div class="card-title fw-lighter"><%= category.name %></div>
+                        <div class="card-main text-end">残<%= (category.budget - category.details.sum(:coin)).to_s(:delimited) %></div>
                       </div>
                     <% end %>
                   </div>
@@ -78,27 +79,51 @@
     </div>
     <div class="col-sm-4">
       <div class="detail-list border">
-        <h4 class="m-2">取引明細</h4>
-        <table class="table w-auto table-sm text-xsmall">
-          <thead>
-            <tr class="text-center">
-              <th class=>日　時</th>
-              <th>カテゴリ</th>
-              <th>金　額</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @details.each do |detail| %>
-              <tr>
-                <td><%= detail.day %></td>
-                <td><%= detail.category.name %></td>
-                <td class="text-end"><%= detail.coin.to_s(:delimited) %></td>
-                <td><%= link_to "削除", users_detail_path(detail), method: :delete, class: "btn btn-danger btn-sm" %></td>
+        <% if user_signed_in? %>
+          <h4 class="m-2">取引明細</h4>
+          <table class="table w-auto table-sm text-xsmall">
+            <thead>
+              <tr class="text-center">
+                <th class=>日　時</th>
+                <th>カテゴリ</th>
+                <th>金　額</th>
+                <th></th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <% @details.each do |detail| %>
+                <tr>
+                  <td><%= detail.day %></td>
+                  <td><%= detail.category.name %></td>
+                  <td class="text-end"><%= detail.coin.to_s(:delimited) %></td>
+                  <td><%= link_to "削除", users_detail_path(detail), method: :delete, class: "btn btn-danger btn-sm" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else%>
+          <h4 class="m-2">明細金額MaxBest</h4>
+          <table class="table w-auto table-sm text-xsmall">
+            <thead>
+              <tr class="text-center">
+                <th class=>日　時</th>
+                <th>カテゴリ</th>
+                <th>金　額</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @details.each_with_index do |detail, i| %>
+                <tr>
+                  <td><%= detail.day %></td>
+                  <td><%= detail.category.name %></td>
+                  <td class="text-end"><%= detail.coin.to_s(:delimited) %></td>
+                  <td><%= i + 1 %>位</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
       </div>
     </div>
   </div>
