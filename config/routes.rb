@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   namespace :users do
-    get 'homes/top'
-    resources :details
+      resources :details
   end
 
   root 'users/homes#top'
