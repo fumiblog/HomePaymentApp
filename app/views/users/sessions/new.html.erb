@@ -3,7 +3,7 @@
     <div class="col-sm-3 m-2"></div>
     <div class="col-sm-4 m-2">
       <div class="login border">
-        <h2 class="p-2">Log in</h2>
+        <h2 class="p-2">L<%= link_to "o", new_admin_session_path %>g in</h2>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="field p-2">

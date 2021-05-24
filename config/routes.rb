@@ -11,8 +11,17 @@ Rails.application.routes.draw do
     resources :categories
     resources :details, only: [:index]
   end
-
-
+  
+  
+  devise_for :admins, skip: :all
+  devise_scope :admin do
+    get 'admins/sign_in' => 'admins/sessions#new', as: 'new_admin_session'
+    post 'admins/sign_in' => 'admins/sessions#create', as: 'admin_session'
+    delete 'admins/sign_out' => 'admins/sessions#destroy', as: 'destroy_admin_session'
+    get 'admins/sign_up' => 'admins/registrations#new', as: 'new_admin_registration'
+    post 'admins' => 'admins/registrations#create', as: 'admin_registration'
+    get 'admins/password/new' => 'admins/passwords#new', as: 'new_admin_password'
+  end
   devise_for :users, skip: :all
   devise_scope :user do
     get 'users/sign_in' => 'users/sessions#new', as: 'new_user_session'
