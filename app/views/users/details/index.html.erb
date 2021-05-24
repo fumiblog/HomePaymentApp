@@ -1,51 +1,30 @@
 <div class="container">
   <div class="row">
     <h4>明　細</h4>
-    <div class="detail-make">
-      <%= form_with model: @detail, url: admins_detai_path(@detail), local: true do |f| %>
-        カテゴリ名：<%= f.text_field :name %>　
-        分　類：<%= f.collection_select :genre_id, @genres, :id, :name %>　
-        予　算：<%= f.text_field :budget, :size => "10" %>　
-        メ　モ：<%= f.text_field :memo, :size => "30" %>　
-        <%= f.submit "作成", class: "btn btn-success" %>
-      <% end %>
-      <div class="category-csv text-end m-1">
-        <%= link_to "CSV出力", admins_categories_path(format: :csv), class: "btn btn-outline-success" %>
-      </div>
+    <div class="detail-csv text-end m-1">
+      <%= link_to "CSV出力", users_details_path(format: :csv), class: "btn btn-outline-success" %>
     </div>
     <div class="category-list">
       <table class="table table-striped">
         <thead>
           <tr class="text-center">
-            <th>カテゴリ名</th>
-            <th>分類名</th>
-            <th>予　算</th>
+            <th>日　付</th>
+            <th>カテゴリ</th>
             <th>金　額</th>
-            <th>消化率</th>
             <th>メ　モ</th>
             <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <% @categories.each do |category| %>
+          <% @details.each do |detail| %>
             <tr>
-              <td><%= category.name %></td>
-              <td><%= category.genre.name %></td>
-              <td class="text-end"><%= category.budget.to_s(:delimited) %></td>
-              <td class="text-end"><%= category.details.sum(:coin).to_s(:delimited) %></td>
-              <td class="text-end">
-                <% if category.details.sum(:coin) == 0  %>
-                  0%
-                <% elsif category.budget == 0 %>
-                  <%= category.details.sum(:coin) %>%
-                <% else %>
-                  <%= number_to_percentage(category.details.sum(:coin).to_f  / category.budget.to_f * 100, :precision => 0) %>
-                <% end %>
-              </td>
-              <td class="fw-lighter"><%= category.memo %></td>
-              <td><%= link_to "訂正", edit_admins_category_path(category), class: "btn btn-warning btn-sm" %></td>
-              <td><%= link_to "削除", admins_category_path(category), method: :delete, class: "btn btn-danger btn-sm" %></td>
+              <td><%= detail.day %></td>
+              <td><%= detail.category.name %></td>
+              <td class="text-end"><%= detail.coin.to_s(:delimited) %></td>
+              <td><%= detail.memo %></td>
+              <td><%= link_to "訂正", edit_users_detail_path(detail), class: "btn btn-warning btn-sm" %></td>
+              <td><%= link_to "削除", users_detail_path(detail), method: :delete, class: "btn btn-danger btn-sm" %></td>
             </tr>
           <% end %>
         </tbody>

@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <h4>明　細</h4>
+    <div class="detail-make">
+      <%= form_with model: @detail, url: users_detail_path(@detail), local: true do |f| %>
+        日　付：<%= f.date_field :day %>　
+        カテゴリ：<%= f.collection_select :category_id, @category, :id, :name %>　
+        金　額：<%= f.text_field :coin, :size => "10" %>　
+        メ　モ：<%= f.text_field :memo, :size => "30" %>　
+        <%= f.submit "更新", class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>
