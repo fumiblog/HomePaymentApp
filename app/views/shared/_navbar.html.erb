@@ -2,6 +2,14 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a href="<%= root_path %>" class="navbar-brand"><%= image_tag 'us50c_裏.png', :size => '50x50' %></a>
+      <div class="sign-message">
+        <% if user_signed_in? %>
+          <div class="sign-in-message"><%= current_user.name %>さんようこそ！</div>
+        <% elsif admin_signed_in? %>
+          <div class="sign-in-message">ご苦労様！</div>
+        <% else %>
+        <% end %>
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-lavel="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -12,22 +20,27 @@
               Master
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a href="<%= admins_genres_path %>" class="dropdown-item">Genre</a></li>
-              <li><a href="<%= admins_categories_path %>" class="dropdown-item">Category</a></li>
-              <li><a href="<%= admins_details_path %>" class="dropdown-item">Detail</a></li>
-              <li><a href="#" class="dropdown-item">Action3</a></li>
+              <% if admin_signed_in? %>
+                <li><a href="<%= admins_genres_path %>" class="dropdown-item">Genre</a></li>
+                <li><a href="<%= admins_categories_path %>" class="dropdown-item">Category</a></li>
+                <li><a href="<%= admins_details_path %>" class="dropdown-item">Detail</a></li>
+              <% elsif user_signed_in? %>
+                <li><a href="<%= users_categories_path %>" class="dropdown-item">Category</a></li>
+                <li><a href="<%= users_details_path %>" class="dropdown-item">Detail</a></li>
+              <% else %>
+              <% end %>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="<%= new_user_session_path %>" class="nav-link" tavindex="-1" aria-disabled="true">Login</a>
-          </li>
-          <li class="nav-item">
-            <a href="<%= destroy_user_session_path %>" class="nav-link" data-method="delete" tavindex="-1" aria-disabled="true">Logout</a>
-          </li>
+          <% if user_signed_in? || admin_signed_in? %>
+            <li class="nav-item">
+              <a href="<%= destroy_user_session_path %>" class="nav-link" data-method="delete" tavindex="-1" aria-disabled="true">Logout</a>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <a href="<%= new_user_session_path %>" class="nav-link" tavindex="-1" aria-disabled="true">Login</a>
+            </li>
+          <% end %>
         </ul>
-        <% if user_signed_in? %>
-          <div class="sign-in-message"><%= current_user.name %>さんようこそ！</div>
-        <% end %>
         <form action="" class="d-flex">
           <input type="seatch" class="form-control me-2" placeholder="Search" aria-lavel="Serch">
           <button class="btn btn-outline-success" type="submit">Search</button>
