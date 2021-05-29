@@ -1,4 +1,5 @@
 class Users::CategoriesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @category = Category.new
     # byebug

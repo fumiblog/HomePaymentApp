@@ -1,4 +1,11 @@
 class Admins::GenresController < ApplicationController
+  before_action :authenticate_admin!
+  # before_action :current_user
+  # def correct_user
+  #   @admin = Admin.find(params[:id])
+  #   unless @genre.user.id == current_user.id
+      
+    # end
   def index
     @genre = Genre.new
     @genres = Genre.all
