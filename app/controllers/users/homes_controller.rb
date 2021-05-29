@@ -2,7 +2,7 @@ class Users::HomesController < ApplicationController
   def top
     @genres = Genre.all
     gon.genre_name = Genre.all.pluck(:name)
-    gon.progress_coin = Category.sum(:budget) - Genre.joins(categories: :details).sum(:coin)
+    gon.genre_budget = Category.group(:genre_id).sum(:budget).values
     if user_signed_in?
       @user_budget = current_user.categories.sum(:budget)
       @user_coin = current_user.details.sum(:coin)
