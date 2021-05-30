@@ -185,6 +185,7 @@ GEM
       activerecord (>= 5.0.0)
     orm_adapter (0.5.0)
     pdf-core (0.9.0)
+    pg (1.2.3)
     popper_js (2.9.2)
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
@@ -285,7 +286,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     thinreports (0.12.0)
       prawn (~> 2.2)
       rexml
@@ -345,6 +345,7 @@ DEPENDENCIES
   meta-tags
   mini_magick
   order_as_specified
+  pg
   pry-byebug
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
@@ -355,7 +356,6 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   spring
-  sqlite3 (~> 1.4)
   thinreports
   turbolinks (~> 5)
   tzinfo-data
