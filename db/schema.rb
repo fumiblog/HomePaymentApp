@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_033633) do
+ActiveRecord::Schema.define(version: 2021_06_06_132002) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -40,10 +43,10 @@ ActiveRecord::Schema.define(version: 2021_05_24_033633) do
     t.integer "payment_method"
     t.integer "category_id"
     t.string "memo"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.integer "coin"
     t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "genres", force: :cascade do |t|
