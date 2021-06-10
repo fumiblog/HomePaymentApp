@@ -5,9 +5,7 @@ class Users::HomesController < ApplicationController
     gon.genre_budget = Category.group(:genre_id).sum(:budget).values
     if user_signed_in?
       @user_budget = current_user.categories.sum(:budget)
-      @user_coin = current_user.details.sum(:coin)
-      if params[:genre_id] == nil 
-        @categories = current_user.categories
+      @user_coin = current_user.details.sum(:coin) = current_user.categories
         @details = current_user.details.order(day: 'DESC')
       else
         @categories = current_user.categories.where(:genre_id => params[:genre_id])
