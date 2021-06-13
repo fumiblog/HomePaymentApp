@@ -1,0 +1,15 @@
+current directory: /Users/fumiblog/docker/HomePaymentApp/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+/Users/fumiblog/.rbenv/versions/2.6.3/bin/ruby -I /Users/fumiblog/.rbenv/versions/2.6.3/lib/ruby/site_ruby/2.6.0 -r ./siteconf20210613-9620-7yap72.rb extconf.rb
+creating Makefile
+
+current directory: /Users/fumiblog/docker/HomePaymentApp/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= clean
+
+current directory: /Users/fumiblog/docker/HomePaymentApp/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\=
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+
+current directory: /Users/fumiblog/docker/HomePaymentApp/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20210613-9620-8pv7ue/skiptrace/internal
