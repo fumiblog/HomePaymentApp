@@ -9,13 +9,15 @@ class Users::CategoriesController < ApplicationController
       @categories = current_user.categories.where(genre_id: params[:genre_id])
     end
     @genres = Genre.all
+    # byebug
   end
 
   def create
     @category = Category.new(category_params)
     @category.user_id = current_user.id
-    @category.save
-    redirect_to admins_categories_path
+    @category.save!
+    redirect_to users_categories_path
+    # byebug
   end
 
   def edit

@@ -2,11 +2,12 @@
   <div class="row">
     <h4>カテゴリ</h4>
     <div class="category-make">
-      <%= form_with model: @category, url: admins_categories_path, local: true do |f| %>
+      <%= form_with model: @category, url: users_categories_path, local: true do |f| %>
         カテゴリ名：<%= f.text_field :name %>　
         分　類：<%= f.collection_select :genre_id, @genres, :id, :name %>　
         予　算：<%= f.text_field :budget, :size => "10" %>　
         メ　モ：<%= f.text_field :memo, :size => "30" %>　
+        <%= f.hidden_field :user_id %>
         <%= f.submit "作成", class: "btn btn-success" %>
       <% end %>
       <div class="category-csv text-end m-1">

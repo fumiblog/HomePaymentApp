@@ -12,6 +12,7 @@ class Admins::CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+    @category.user_id = current_user.id
     @category.save
     redirect_to admins_categories_path
   end
