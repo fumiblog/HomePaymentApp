@@ -3,6 +3,7 @@
     <div class="col-sm-3">
       <div class="progress-data border">
         <% if user_signed_in? %>
+          <canvas id="genreGraph"></canvas>
           <h4 class="m-2">使用可能残高</h4>
           <p class="countup text-end h1"><%= (@user_budget - @user_coin).to_s(:delimited) %>円</p>
           <h4 class="m-2">予　算</h4>
