@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   namespace :users do
       resources :details
       resources :categories
+      resources :homes, only: [:index]
   end
 
-  root 'users/homes#top'
+  root 'users/homes#index'
 
   namespace :admins do
     resources :genres

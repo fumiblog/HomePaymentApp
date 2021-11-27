@@ -1,0 +1,22 @@
+<div class="container">
+  <% if user_signed_in? %>
+    <div id="calendar"></div>
+    <%= javascript_pack_tag 'calendar/event' %>
+  <% elsif admin_signed_in? %>
+  <% else %>
+    <div class="row">
+      <div class="col-sm rounded bg-warning m-2 p-3">
+        <div class="h5 text-center">ユーザー数</div>
+        <p class='h1 text-center'><%= @users.count %></p>
+      </div>
+      <div class="col-sm rounded border m-2 p-3">
+        <div class="h5 text-center">カテゴリ数</div>
+        <p class='h1 text-center'><%= @categories.count %></p>
+      </div>
+      <div class="col-sm rounded border m-2 p-3">
+        <div class="h5 text-center">細分化率平均</div>
+        <p class='h1 text-center'><%= @categories.count / @users.count / @genres.count %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
